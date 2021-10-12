@@ -1,0 +1,100 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>Past Order Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="salon-detail ion-padding-horizontal">
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/Images/aductive_small.png" />
+      </ion-thumbnail>
+      <ion-label>
+        <h5>{{data?.branch?.name}}</h5>
+        <p>{{data?.branch?.address}}</p>
+      </ion-label>
+    </ion-item>
+    <h5 class="date-title">Appointment Date &Time</h5>
+    <p>{{data?.start_time | date :'dd MMMM yyyy'}} - {{data?.start_time | date :'hh:mm a'}}</p>
+
+    <ion-button mode="md" expand="block" class="btn-rebook ion-text-capitalize" *ngIf="data?.status==2">
+      Completed
+    </ion-button>
+    <ion-button mode="md" expand="block" class="btn-rebook ion-text-capitalize" *ngIf="data?.status==3">
+      Cancel
+    </ion-button>
+
+  </div>
+
+  <div class="ticket ion-margin-horizontal">
+    <div class="ticket__wrapper">
+      <div class="ticket__header">
+        <h4 class="title">
+          <h5 class="branch_name">{{data?.branch?.name}} <span
+              class="ion-float-right">{{data?.currency}}{{data?.total}}</span></h5>
+        </h4>
+        <p class="info-text">{{data?.branch?.address}}</p>
+      </div>
+    </div>
+    <div class="ticket__divider">
+      <div class="ticket__notch"></div>
+      <div class="ticket__notch ticket__notch--right"></div>
+    </div>
+    <div class="ticket__body">
+      <section class="ticket__section">
+        <div class="date-section">
+          <div class="tittle_div">
+            <p class="info-text">Services <span class="ion-float-end">Price</span></p>
+            <p class="date-label" *ngFor="let item of data?.services">
+              {{item?.service?.name}}
+              <span class="ion-float-end">{{item?.service?.currency}}{{item?.service?.price}}</span>
+            </p>
+          </div>
+        </div>
+        <div class="date-section">
+          <div>
+            <p class="info-text">Total Duration</p>
+            <p class="date-label">{{data?.duration}}</p>
+          </div>
+          <div>
+            <p class="info-text">Payment Status</p>
+            <p class="date-label" *ngIf="data?.payment_status== 0">Pending</p>
+            <p class="date-label" *ngIf="data?.payment_status==1">Complete</p>
+          </div>
+        </div>
+        <div class="date-section">
+          <div>
+            <p class="info-text">Booking Number</p>
+            <p class="date-label">{{data?.booking_id}}</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="ticket__divider" *ngIf="data?.status!=3">
+      <div class="ticket__notch"></div>
+      <div class="ticket__notch ticket__notch--right"></div>
+    </div>
+    <div class="ticket__footer" *ngIf="data?.status!=3">
+      <div class="ion-padding-top ion-padding-horizontal">
+        <div class="rating-bar">
+          <ion-icon name="star" [ngClass]="rdata?.star >= 1 ? 'active':''" (click)="rdata.star=1"></ion-icon>
+          <ion-icon name="star" [ngClass]="rdata?.star >= 2 ? 'active':''" (click)="rdata.star=2"></ion-icon>
+          <ion-icon name="star" [ngClass]="rdata?.star >= 3 ? 'active':''" (click)="rdata.star=3"></ion-icon>
+          <ion-icon name="star" [ngClass]="rdata?.star >= 4 ? 'active':''" (click)="rdata.star=4"></ion-icon>
+          <ion-icon name="star" [ngClass]="rdata?.star >= 5 ? 'active':''" (click)="rdata.star=5"></ion-icon>
+        </div>
+        <div class="ion-padding">
+          <ion-textarea rows="4" placeholder="Add You Review..." [(ngModel)]="rdata.cmt" mode="md"></ion-textarea>
+        </div>
+      </div>
+      <ion-button expand="block" mode="md" class="ion-no-margin btn-general btn-send" (click)="review()"
+        [disabled]="data?.review">SEND
+      </ion-button>
+
+    </div>
+  </div>
+</ion-content>

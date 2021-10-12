@@ -1,0 +1,114 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>Payment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding-horizontal payable-section">
+    <h5 class="info-title">Total Payable</h5>
+    <h2>{{data?.currency_symbol}}{{total}}</h2>
+    <ion-icon class="wallet-icon" src="../../../assets/svg_icon/wallet.svg"></ion-icon>
+  </div>
+  <div class="ion-padding-horizontal payment-methos-section">
+    <h5 class="info-title">Offline Payment</h5>
+    <div class="payment-list">
+      <div class="btn-method active ion-text-center" [class.active]="payment_method=='Offline'"
+        *ngIf="data?.offline_payment" (click)="payment_method='Offline'">Local</div>
+    </div>
+    <h5 class="info-title">Online Payment</h5>
+    <div class="payment-list">
+      <div class="btn-method  btn-paypal ion-text-center" *ngIf="data?.paypal_status"
+        [class.active]="payment_method=='Paypal'" (click)="payment_method='Paypal'">
+        PayPal</div>
+      <div class="btn-method ion-text-center" [class.active]="payment_method=='Strip'" *ngIf="data?.stipe_status"
+        (click)="payment_method='Strip'">Strip</div>
+      <div class="btn-method active ion-text-center" [class.active]="payment_method=='Razorpay'"
+        *ngIf="data?.razor_status" (click)="payment_method='Razorpay'">Razorpay</div>
+
+    </div>
+    <!-- <h5 class="info-title ion-margin-bottom">
+      Card
+      <ion-button fill="clear" mode="md" class="ion-no-margin ion-text-capitalize ion-float-right btn-add-card">Add Card
+      </ion-button>
+    </h5> -->
+    <!-- <ion-input mode="md" value="xxxx  xxxx  xxxx  1289" type="text">
+      <div class="circle">
+        <div></div>
+      </div>
+    </ion-input> -->
+    <form action="" #f="ngForm" [class.hide]="payment_method!='Strip'">
+      <p class="input-title">CARD NUMBER</p>
+      <ion-input mode="md" placeholder="xxxx  xxxx  xxxx  1289" type="text" [(ngModel)]="cardData.number" name="num"
+        required>
+      </ion-input>
+
+
+      <ion-row>
+        <ion-col size="7" class="ion-no-padding date-col">
+          <p class="input-title">EXPRIRATION YEAR</p>
+          <ion-input mode="md" placeholder="2022" type="text" [(ngModel)]="cardData.expYear" name="exdate" required>
+          </ion-input>
+        </ion-col>
+        <ion-col size="5" class="ion-no-padding">
+          <p class="input-title">EXPRIRATION MONTH</p>
+          <ion-input mode="md" placeholder="09" type="text" [(ngModel)]="cardData.expMonth" required name="exdate">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="7" class="ion-no-padding date-col">
+          <p class="input-title">CARD HOLDER'S NAME</p>
+          <ion-input mode="md" placeholder="Randy Betancourt" [(ngModel)]="cardData.name" type="text" name="exdate"
+            required>
+          </ion-input>
+        </ion-col>
+        <ion-col size="5" class="ion-no-padding">
+          <p class="input-title">CVV</p>
+          <ion-input mode="md" placeholder="****" type="text" [(ngModel)]="cardData.cvc" required name="cvv">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+    </form>
+    <div class="detail_div" *ngIf="payment_method=='Offline'">
+      <p class="cash_text">Cash On Arrival</p>
+      <p class="cash_text detail_text">Your selected payment method is cash on arrival. Please click on Pay
+        Button to
+        proceed</p>
+    </div>
+    <div class="detail_div" *ngIf="payment_method=='Paypal'">
+
+      <p class="cash_text detail_text">You selected Paypal as payment method. Please click on Pay
+        Button to
+        proceed</p>
+    </div>
+    <div class="detail_div" *ngIf="payment_method=='Razorpay'">
+
+      <p class="cash_text detail_text">You selected Razorpay as payment method. Please click on Pay
+        Button to
+        proceed</p>
+    </div>
+  </div>
+  <!-- <div class="ion-padding-horizontal note-section">
+    <ion-radio-group value="Pay at store">
+      <ion-item lines="full" mode="md">
+        <ion-label>Pay at store</ion-label>
+        <ion-radio slot="end" mode="md" value="Pay at store"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <ion-textarea rows="7" placeholder="Add Booking Notes"></ion-textarea>
+  </div> -->
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" class="ion-no-margin btn-general" (click)="Payment()" [disabled]="!f.valid"
+    *ngIf="payment_method=='Strip'">
+    Pay {{data?.currency_symbol}}{{total}}
+  </ion-button>
+  <ion-button *ngIf="payment_method!='Strip'" expand="full" class="ion-no-margin btn-general" (click)="Payment()">
+    Pay {{data?.currency_symbol}}{{total}}
+  </ion-button>
+</ion-footer>

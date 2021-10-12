@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title header-title>SORT BY</ion-title>
+    <ion-buttons slot="end" class="ion-no-margin">
+      <ion-button (click)="filter(sort)" mode="md" fill="clear" class="btn-close">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <ion-list class="ion-no-padding">
+    <ion-radio-group [value]="sort">
+      <ion-item mode="md" lines="full">
+        <ion-label>Top rated</ion-label>
+        <ion-radio slot="start" value="Top rated" mode="md" (click)="filter('Top rated')"></ion-radio>
+      </ion-item>
+
+      <ion-item mode="md" lines="full">
+        <ion-label>Featured</ion-label>
+        <ion-radio slot="start" value="Featured" mode="md" (click)="filter('Featured')"></ion-radio>
+      </ion-item>
+
+      <ion-item mode="md" lines="full">
+        <ion-label>Newest</ion-label>
+        <ion-radio slot="start" value="Newest" mode="md" (click)="filter('Newest')"></ion-radio>
+      </ion-item>
+
+      <ion-item mode="md" lines="none">
+        <ion-label>Sort By Name
+        </ion-label>
+        <ion-radio slot="start" value="Sort By Name" mode="md" (click)="filter('Sort By Name')"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>

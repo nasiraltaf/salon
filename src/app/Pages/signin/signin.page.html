@@ -1,0 +1,38 @@
+
+<ion-content class="ion-padding-horizontal">
+  
+  <p class="padd"></p>
+    <ion-title header-title>Welcome</ion-title>
+	
+	<p input-label class="center head pad16leftright">Welcome to Beautivery!</p>
+	
+	<p input-label class="center colp pad16leftright">We deliver Beauty Salon Service to your Doorstep</p>
+
+
+  <form action="" #f="ngForm">
+	<div class="pad16leftright" >
+    <ion-input custom-input class="emailsett emailsett1 " type="email" placeholder="Email Address" [(ngModel)]="data.email" name="email" required></ion-input>
+    <p class="err" *ngIf="err?.email">{{err?.email}}*</p>
+   
+    <ion-input custom-input  class="emailsett "  [type]="showpassword ? 'text' : 'password'" placeholder="Password"
+      [(ngModel)]="data.password" name="password" required>
+      <ion-button class="btn-password-toggle ion-no-margin" fill="clear" (click)="showpassword = !showpassword">
+        <ion-icon slot="icon-only" [name]="showpassword ? 'eye-off' : 'eye'"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <p class="err" *ngIf="err?.password">{{err?.password}}*</p>
+    
+	</div>
+	
+	<a class="ion-text-center btn-signin buttnclass"  (click)="doSignIn()">Login   <ion-back-button defaultHref="" icon="chevron-back" mode="md" class="btn-back iconcss"></ion-back-button></a>
+	
+   
+  </form>
+  
+  
+  <a class="ion-text-center btn-signin buttnclassothers" (click)="doSignUp()">Register <ion-back-button defaultHref="" icon="chevron-back" mode="md" class="btn-back iconcss"></ion-back-button></a>
+  
+  <a class="ion-text-center btn-signin buttnclassothers" (click)="doForgot()">Forgot Password? <ion-back-button defaultHref="" icon="chevron-back" mode="md" class="btn-back iconcss"></ion-back-button></a>
+  
+  
+</ion-content>

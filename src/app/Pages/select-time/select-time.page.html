@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>Select Time</ion-title>
+  </ion-toolbar>
+  <div class="calendar-section">
+    <h5>
+      <ion-icon name="chevron-back-outline" (click)="action(1)"></ion-icon>{{calender.date[0]?.date| date:'LLL'}}
+      {{calender.date[0]?.date| date:'yyyy'}} <ion-icon (click)="action(2)" name="chevron-forward-outline">
+      </ion-icon>
+    </h5>
+    <div class="cn_div">
+      <table *ngFor='let i of calender.date | slice:slice.from:slice.to; let j=index'>
+        <tr>
+          <th>{{i?.date| date:'EEEEEE'}}</th>
+        </tr>
+        <tr [class.disabled]="!i.selected">
+          <td (click)="selected = i?.date;request()">
+            <div [class.active]="selected == i?.date">{{i?.date | date:'d'}}</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <h5 class="info-title">Choose Time</h5>
+  <ion-row>
+    <ion-col size="3" *ngFor="let slot of timeSlot" class="ion-no-padding">
+      <div class="time-slot" [ngClass]="{active: slot.issel}" (click)="activeSlot(slot)">
+        {{slot.time}}
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <!-- <div class="close-section ion-text-center" *ngIf="!isOpen">
+    <ion-icon class="close-icon" src="../../../assets/svg_icon/close.svg"></ion-icon>
+    <h5 class="label-one">
+      Addictive Beauty <br />
+      is closed today
+    </h5>
+    <h5 class="label-two">But you can book for 16 April</h5>
+    <ion-button class="ion-no-margin ion-text-capitalize btn-general" (click)="isOpen = !isOpen">
+      Go to Thursday, 16 April
+    </ion-button>
+  </div>
+  <div class="open-section" *ngIf="isOpen">
+    <h5 class="info-title">Selected Services</h5>
+    <div class="service-div" *ngFor="let item of serviceList">
+      <h5 class="service-name">{{item.name}} <span class="ion-float-right">${{item.price}}</span></h5>
+      <p class="duration-text">
+        Duration : {{item.duration}} Min
+        <ion-icon class="circle-icon" name="ellipse"></ion-icon> Women only
+      </p>
+      <p class="description ion-text-wrap">
+        Looking for a quick haircut? This is the one for you.
+      </p>
+    </div>
+    <div class="total-section">
+      <h6 class="total-label ion-no-margin">Total Payable</h6>
+      <p class="duration-text ion-no-margin">Duration : 120Min</p>
+      <p class="amount-text ion-no-margin">$85</p>
+    </div>
+  </div> -->
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" class="ion-no-margin btn-general" (click)="bookNow()">
+    continue
+  </ion-button>
+</ion-footer>

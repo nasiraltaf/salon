@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>Beauty Salon</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <div class="segment-section">
+      <div class="segment-button active" *ngFor="let item of data" (click)="changecat(item?.name)">{{item?.name}}</div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let item of data">
+    <div class="title-section" [id]="item?.name">
+      <h5>{{item?.name}}</h5>
+    </div>
+    <div class="ion-padding-horizontal service-list">
+      <ion-item *ngFor="let subitem of item.service" (click)="subitem.checked = !subitem.checked">
+        <ion-label>
+          <h5 class="ion-text-capitalize">{{subitem?.name }}<span
+              class="ion-float-right">{{subitem?.currency}}{{subitem?.price}}</span>
+          </h5>
+          <p class="duration-text">Duration : {{subitem?.duration}} Min <ion-icon class="circle-icon" name="ellipse">
+            </ion-icon> <span *ngIf="subitem?.for_who==1">Women only</span> <span *ngIf="subitem?.for_who ==2">Man
+              only</span></p>
+          <p class="description ion-text-wrap">{{subitem?.description}}</p>
+        </ion-label>
+        <div class="styled-input-single">
+          <input type="checkbox" name="fieldset-1" [checked]="subitem.checked" [id]="subitem?.name" disabled />
+          <label [for]="subitem?.name"></label>
+        </div>
+      </ion-item>
+    </div>
+  </div>
+  <div class="total-section">
+    <h6 class="total-label ion-no-margin">Total Payable</h6>
+    <p class="duration-text ion-no-margin">Duration : {{getTotal.duration}}Min</p>
+    <p class="amount-text ion-no-margin">{{currency}}{{getTotal.temp}}</p>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" class="ion-no-margin btn-general" (click)="bookNow()">
+    BOOK NOW
+  </ion-button>
+</ion-footer>

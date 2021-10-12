@@ -1,0 +1,190 @@
+<!--<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <h3>Hi, {{rdata?.name}}</h3>
+    <p>Book what you love</p>
+  </ion-toolbar>
+<ion-searchbar radious-searchbar placeholder="Search for a service or venue" clearIcon="no" mode="md"
+    searchIcon="../../../assets/svg_icon/Search_icon.svg" [(ngModel)]="term"></ion-searchbar>
+</ion-header>-->
+
+<ion-content class="ion-padding-horizontal">
+	 <p class="padd1"></p>	
+<!--<p input-label class="center head pad16leftright">Hi, {{rdata?.name}}</p>-->
+<p input-label class="center head pad16leftright">Quick Search for a service!</p>
+  <ion-searchbar radious-searchbar class="searchs" placeholder="Search for a service or venue" clearIcon="no" mode="md"
+    searchIcon="../../../assets/svg_icon/Search_icon.svg" [(ngModel)]="term"></ion-searchbar>
+	<!-- <p class="padd2"></p>-->	
+  <ion-refresher slot="fixed" id="refresher" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  
+   
+ <!-- <p class="no_data_p" *ngIf="data?.featured?.length==0">No data</p>
+  <div class="featured_venue">
+    <div class="featured-venues-section" *ngFor="let item of data?.featured |filter:term"
+      (click)="viewSlonDetail(item?.id)">
+      <img [src]="item?.imageUri" alt="">
+	<div class="innerdata">	<p class="salon-address">{{item?.address}}</p>
+	  <h6 class="salon-name">{{item?.name}}</h6></div>
+    </div>
+  </div>
+  -->
+  
+
+  
+ <h5 class="info-title">Featured Venues</h5>
+  <ion-grid>
+    <ion-row>
+      
+      <ion-col size="12">
+
+        <ion-slides pager="false" [options]="slideOptsTwo" #slideWithNav2
+          (ionSlideDidChange)="SlideDidChange(sliderTwo,slideWithNav2)">
+          <ion-slide *ngFor="let item of data?.featured |filter:term"
+      (click)="viewSlonDetail(item?.id)">
+            
+			<img [src]="item?.imageUri" alt="" />
+			<div class="innerdata">	<p class="salon-address">{{item?.address}}</p>
+	  <h6 class="salon-name">{{item?.name}}</h6></div>
+          </ion-slide>
+        </ion-slides>
+
+      </ion-col>
+	    <ion-col size="4" >  </ion-col>
+	  <ion-col size="4" class="arros">
+        <span class="slider-nav arrow-prev" (click)="slidePrev(sliderTwo,slideWithNav2)">
+          <!--<div class="prev-icon-custom custon-nav" [class.disabled]="sliderTwo.isBeginningSlide"></div>-->
+		  
+		  <ion-back-button defaultHref="" [class.disabled]="sliderTwo.isBeginningSlide" icon="chevron-back" mode="md" class="btn-back iconcss11 prev-icon-custom1 custon-nav"></ion-back-button>
+		  
+        </span>
+		
+		<span class="slider-nav arrow-next" (click)="slideNext(sliderTwo,slideWithNav2)">
+         <!-- <div class="next-icon-custom custon-nav" [class.disabled]="sliderTwo.isEndSlide"></div>-->
+		   <ion-back-button defaultHref="" [class.disabled]="sliderTwo.isEndSlide" icon="chevron-back" mode="md" class="btn-back iconcss prev-icon-custom1 custon-nav"></ion-back-button>
+		  
+		
+        </span>
+		
+      </ion-col>
+	  
+	      <ion-col size="4" >  </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+ 
+ 
+ 
+ 
+   
+ <h5 class="info-title">Popular Categories</h5>
+  <ion-grid>
+    <ion-row>
+      
+      <ion-col size="12">
+
+        <ion-slides pager="false" [options]="slideOptsThree" #slideWithNav3
+          (ionSlideDidChange)="SlideDidChange(sliderThree,slideWithNav3)">
+          <ion-slide (click)="viewList(item)" *ngFor="let item of data.popular_category |filter:term">
+            
+			<img [src]="item?.imageUri" alt="" />
+			<div class="innerdata">	<h6 class="salon-name">{{item?.name}}</h6></div>
+          </ion-slide>
+        </ion-slides>
+
+      </ion-col>
+	    <ion-col size="4" >  </ion-col>
+	  <ion-col size="4" class="arros">
+        <span class="slider-nav arrow-prev" (click)="slidePrev(sliderThree,slideWithNav3)">
+          <!--<div class="prev-icon-custom custon-nav" [class.disabled]="sliderTwo.isBeginningSlide"></div>-->
+		  
+		  <ion-back-button defaultHref="" [class.disabled]="sliderThree.isBeginningSlide" icon="chevron-back" mode="md" class="btn-back iconcss11 prev-icon-custom1 custon-nav"></ion-back-button>
+		  
+        </span>
+		
+		<span class="slider-nav arrow-next" (click)="slideNext(sliderThree,slideWithNav3)">
+         <!-- <div class="next-icon-custom custon-nav" [class.disabled]="sliderTwo.isEndSlide"></div>-->
+		   <ion-back-button defaultHref="" [class.disabled]="sliderThree.isEndSlide" icon="chevron-back" mode="md" class="btn-back iconcss prev-icon-custom1 custon-nav"></ion-back-button>
+		  
+		
+        </span>
+		
+      </ion-col>
+	  
+	      <ion-col size="4" >  </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+  
+  
+   <h5 class="info-title">More Categories</h5>
+  <ion-grid>
+    <ion-row>
+      
+      <ion-col size="12">
+
+        <ion-slides pager="false" [options]="slideOptsOne" #slideWithNav1
+          (ionSlideDidChange)="SlideDidChange(sliderOne,slideWithNav1)">
+          <ion-slide (click)="viewList(item)" *ngFor="let item of data.more_category |filter:term" >
+            
+			<img style="    width: 180px;
+    height: 134px;float: left;" [src]="item?.imageUri" alt="" />
+			<div class="innerdata">	<h6 class="salon-name">{{item?.name}}</h6></div>
+          </ion-slide>
+        </ion-slides>
+
+      </ion-col>
+	    <ion-col size="4" >  </ion-col>
+	  <ion-col size="4" class="arros">
+        <span class="slider-nav arrow-prev" (click)="slidePrev(sliderOne,slideWithNav1)">
+          <!--<div class="prev-icon-custom custon-nav" [class.disabled]="sliderTwo.isBeginningSlide"></div>-->
+		  
+		  <ion-back-button defaultHref="" [class.disabled]="sliderOne.isBeginningSlide" icon="chevron-back" mode="md" class="btn-back iconcss11 prev-icon-custom1 custon-nav"></ion-back-button>
+		  
+        </span>
+		
+		<span class="slider-nav arrow-next" (click)="slideNext(sliderOne,slideWithNav1)">
+         <!-- <div class="next-icon-custom custon-nav" [class.disabled]="sliderTwo.isEndSlide"></div>-->
+		   <ion-back-button defaultHref="" [class.disabled]="sliderOne.isEndSlide" icon="chevron-back" mode="md" class="btn-back iconcss prev-icon-custom1 custon-nav"></ion-back-button>
+		  
+		
+        </span>
+		
+      </ion-col>
+	  
+	      <ion-col size="4" >  </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+  
+ 
+  <!--<h5 class="info-title">Popular Categories</h5>
+  <p class="no_data_p" *ngIf="data?.popular_category?.length==0">No data</p>
+  <div class="popular-category">
+
+    <div class="main-section" (click)="viewList(item)" *ngFor="let item of data.popular_category |filter:term">
+      <img [src]="item?.imageUri" alt="">
+      <div class="text-section">
+        <p class="ion-no-margin">{{item?.name}}</p>
+      </div>
+    </div>
+  </div>
+  <h5 class="info-title">More Categories</h5>
+  <p class="no_data_p" *ngIf="data?.more_category?.length==0">No data</p>
+  <div class="more-categories-section">
+
+    <div class="main-section" *ngFor="let item of data.more_category |filter:term" (click)="viewList(item)">
+      <img [src]="item.imageUri" alt="">
+      <div class="text-section">
+        <p class="ion-no-margin ion-text-center">{{item?.name}}</p>
+      </div>
+    </div>
+  </div>
+-->
+
+
+
+
+</ion-content>

@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>{{catgoryName}}</ion-title>
+  </ion-toolbar>
+  <ion-searchbar radious-searchbar placeholder="Search here" clearIcon="no" mode="md"
+    searchIcon="../../../assets/svg_icon/Search_icon.svg" [(ngModel)]="term"></ion-searchbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <ion-refresher slot="fixed" id="refresher" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="option-list">
+    <div class="option" (click)="presentTopratedModal()">
+      {{sortType}} <ion-icon name="chevron-down"></ion-icon>
+    </div>
+    <div class="option" (click)="presentCategoryModal()">
+      {{type}} <ion-icon name="chevron-down"></ion-icon>
+    </div>
+  </div>
+  <!-- <h5 class="info-title">Result for Beauty Salon in UK</h5> -->
+  <div no-data *ngIf="data?.length == 0">
+    <img src="../../../assets/Images/no-data-icon-10.jpg" alt="no data">
+  </div>
+  <div class="salon-section" *ngFor="let item of data |filter:term | filterBy: genderFilter"
+    (click)="viewSlonDetail(item?.id)">
+    <div class="image-section">
+      <img [src]="item.imageUri" alt="" />
+      <ion-button mode="md" fill="clear" class="btn-like" [ngClass]="{'active-like': item.fev==true}">
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button>
+      <div class="fix-label" *ngIf="item?.for_who == 1">
+        WOMEN ONLY
+      </div>
+      <div class="fix-label" *ngIf="item?.for_who == 0">
+        UNISEX
+      </div>
+      <div class="fix-label" *ngIf="item?.for_who == 2">
+        MEN ONLY
+      </div>
+    </div>
+    <h6 class="salon-name">{{item.name}}</h6>
+    <p class="salon-address">{{item.address}}</p>
+    <ion-row>
+      <ion-col size="4" class="ion-no-padding">
+        <ion-icon name="star" class="star-icon"></ion-icon>
+        <span class="everage-star-label">{{item.avg_rating}} Great</span>
+      </ion-col>
+      <ion-col size="4" class="ion-no-padding">
+        <div class="circle"></div>
+        <span class="total-rating-label">{{item.reviews_count}} Rating</span>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" mode="ios">
+    <ion-fab-button (click)="viewInMap()">
+      <ion-icon src="../../../assets/svg_icon/awesome-map.svg"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

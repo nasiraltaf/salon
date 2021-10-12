@@ -1,0 +1,99 @@
+ion-header {
+  border-radius: 0px 0px 20px 20px;
+  background: #680e1a;
+  ion-toolbar {
+    --background: transparent;
+    &:last-child {
+      --min-height: 40px;
+    }
+    .segment-section {
+      display: flex;
+      overflow-x: scroll;
+      padding-left: 6px;
+      .segment-button {
+        font-size: 14px;
+        font-family: "Fivo_sans_regular";
+        color: var(--ion-color-white);
+        white-space: nowrap;
+        padding: 0px 10px;
+        border-right: 1px solid var(--ion-color-white);
+        opacity: 0.6;
+        &:last-child {
+          border-right: none;
+        }
+      }
+      .active {
+        opacity: 1;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+ion-content {
+  .title-section {
+    padding: 16px 16px 12px;
+    border-bottom: 3px solid var(--ion-color-dark-blue2);
+    h5 {
+      margin: 0px;
+      font-family: "Fivo_sans_medium";
+      color: var(--ion-color-blue);
+    }
+  }
+  .service-list {
+    ion-item {
+      --padding-start: 0px;
+      --inner-padding-end: 0px;
+      --ripple-color: transparent;
+      ion-label {
+        h5 {
+          font-size: 18px;
+          font-family: "Fivo_sans_medium";
+          color: var(--ion-color-blue);
+          margin-bottom: 6px;
+          span {
+            font-size: 16px;
+            margin-top: 2px;
+          }
+        }
+        .duration-text,
+        .description {
+          font-size: 14px;
+          font-family: "Fivo_sans_regular";
+          color: var(--ion-color-dark-blue);
+          margin-bottom: 0px;
+          .circle-icon {
+            color: #680e1a;
+            font-size: 7px;
+            margin: 0px 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .total-section {
+    margin: 20px 16px;
+    padding: 7px 16px;
+    background: var(--ion-color-dark-blue2);
+    border-radius: 25px;
+    .total-label {
+      color: var(--ion-color-blue);
+      font-family: "Fivo_sans_medium_oblique";
+    }
+    .duration-text {
+      color: var(--ion-color-blue);
+      font-family: "Fivo_sans_oblique";
+      font-size: 14px;
+    }
+    .amount-text {
+      font-size: 14px;
+      font-family: "Fivo_sans_medium";
+      color: var(--ion-color-blue);
+      width: fit-content;
+      float: right;
+      margin-top: -23px;
+    }
+  }
+}

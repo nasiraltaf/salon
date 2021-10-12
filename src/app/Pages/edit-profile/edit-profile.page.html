@@ -1,0 +1,44 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div class="profile-div">
+    <div class="camera-icon" (click)="presentActionSheet()">
+      <ion-icon name="camera-sharp"></ion-icon>
+    </div>
+    <div class="hexagon hexagon1">
+      <div class="hexagon-in1">
+        <div class="hexagon-in2"
+          [style.backgroundImage]="'url('+(imgProfile ?  imgProfile : 'http://placehold.it/100x100' )+')'">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <form action="" #e="ngForm">
+    <p input-label>Name</p>
+    <ion-input custom-input type="text" placeholder="Name" [(ngModel)]="data.name" name="name" required></ion-input>
+
+    <p input-label>Phone</p>
+    <div class="custom-phone-input">
+
+      <ion-input custom-input type="tel" placeholder="Phone" [(ngModel)]="data.phone_no" name="phone" required readonly>
+      </ion-input>
+    </div>
+
+    <p input-label>Email</p>
+    <ion-input custom-input type="email" placeholder="Email" [(ngModel)]="data.email" name="email" required readonly>
+    </ion-input>
+
+    <ion-button expand="block" class="ion-no-margin btn-general" [disabled]="!e.valid" (click)="updateProfile()">
+      Save
+    </ion-button>
+  </form>
+</ion-content>

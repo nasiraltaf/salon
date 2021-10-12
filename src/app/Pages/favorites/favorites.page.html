@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>My Favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <ion-refresher slot="fixed" id="refresher" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div no-data *ngIf="data?.length == 0">
+    <img src="../../../assets/Images/no-data-icon-10.jpg" alt="no data">
+  </div>
+  <div class="salon-section" *ngFor="let item of data">
+    <div class="image-section">
+      <img [src]="item?.imageUri" alt="" />
+      <ion-button mode="md" fill="clear" class="btn-like active-like">
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button>
+      <div class="fix-label" *ngIf="data?.for_who == 1">
+        WOMEN ONLY
+      </div>
+      <div class="fix-label" *ngIf="data?.for_who == 1">
+        MAN ONLY
+      </div>
+
+    </div>
+    <h6 class="salon-name">{{item?.name}}</h6>
+    <p class="salon-address">{{item?.address}}</p>
+    <ion-row>
+      <ion-col size="4" class="ion-no-padding">
+        <ion-icon name="star" class="star-icon"></ion-icon>
+        <span class="everage-star-label">{{item?.avg_rating}} Great</span>
+      </ion-col>
+      <ion-col size="4" class="ion-no-padding">
+        <div class="circle"></div>
+        <span class="total-rating-label">{{item?.review_count}} Rating</span>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

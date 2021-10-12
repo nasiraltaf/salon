@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>Offer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div no-data *ngIf="data?.length == 0">
+    <img src="../../../assets/Images/no-data-icon-10.jpg" alt="no data">
+  </div>
+  <div class="offer-section" *ngFor="let item of data">
+    <div class="discount-text">
+      <h6>Discount</h6>
+    </div>
+    <div class="body-section">
+      <h6>{{item?.title}}</h6>
+      <div class="bottom-section">
+        <div class="date-section">
+          <p class="exp-title">Expires</p>
+          <p class="date-label">{{item?.expiry_date}}</p>
+        </div>
+        <div class="btn-section">
+          <ion-button mode="md" class="btn-apply ion-no-margin ion-text-capitalize" (click)="doapply(item)">
+            Apply
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

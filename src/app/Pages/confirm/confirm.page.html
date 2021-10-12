@@ -1,0 +1,95 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>Review & Confirm</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <ion-item lines="none" class="salon-info ion-margin-top">
+    <ion-thumbnail slot="start">
+      <img [src]="data.imageUri" />
+    </ion-thumbnail>
+    <ion-label>
+      <h5>{{data?.name}}</h5>
+      <p>{{data?.address}}</p>
+      <div class="rating-bar">
+        <ion-icon name="star" [ngClass]="data?.avg_rating >= 1 ? 'active':''"></ion-icon>
+        <ion-icon name="star" [ngClass]="data?.avg_rating >= 2 ? 'active':''"></ion-icon>
+        <ion-icon name="star" [ngClass]="data?.avg_rating >= 3 ? 'active':''"></ion-icon>
+        <ion-icon name="star" [ngClass]="data?.avg_rating >= 4 ? 'active':''"></ion-icon>
+        <ion-icon name="star" [ngClass]="data?.avg_rating >= 5 ? 'active':''"></ion-icon>
+      </div>
+    </ion-label>
+  </ion-item>
+  <h5 class="info-title ion-no-margin">Appointment Date &Time</h5>
+  <p class="date-label">{{seldate | date:'dd, MMMM yyyy'}} - {{timeslot}}</p>
+
+  <h5 class="info-title">Selected Services</h5>
+  <div class="service-div" *ngFor="let item of serviceList">
+    <h5 class="service-name">
+      {{item?.service_data?.name}} <span
+        class="ion-float-right">{{item?.service_data?.currency}}{{item?.service_data?.price}}</span>
+    </h5>
+    <p class="duration-text">
+      Duration : {{item?.time}} Min
+      <ion-icon class="circle-icon" name="ellipse"></ion-icon>
+      <span *ngIf="item?.service_data?.for_who == 1">Women</span>
+      <span *ngIf="item?.service_data?.for_who == 2">Man</span>
+    </p>
+
+    <p class="emp_lbl">
+      Select Employee
+      <ion-button class="arrow_btn" (click)="item.empshow = !item.empshow">
+        <ion-icon [name]="item.empshow ? 'chevron-up':'chevron-down'"></ion-icon>
+      </ion-button>
+    </p>
+
+    <p *ngIf="item?.employee_data.length==0" class="no_data_p">No data</p>
+    <div class="employee_div" *ngIf="item?.empshow">
+      <ion-row>
+        <ion-col size="12" *ngFor="let emp of item?.employee_data" (click)="selectEmployee(item,emp)">
+          <div class="img_div">
+            <img [src]="emp?.imageUri">
+
+          </div>
+
+
+
+
+          <div class="info_div">
+            <h3 class="name">{{emp?.name}} </h3>
+            <ion-icon name="star" [ngClass]="emp?.avg_rating >= 1 ? 'rated_ic':''"></ion-icon>
+            <ion-icon name="star" [ngClass]="emp?.avg_rating >= 2 ? 'rated_ic':''"></ion-icon>
+            <ion-icon name="star" [ngClass]="emp?.avg_rating >= 3 ? 'rated_ic':''"></ion-icon>
+            <ion-icon name="star" [ngClass]="emp?.avg_rating >= 4 ? 'rated_ic':''"></ion-icon>
+            <ion-icon name="star" [ngClass]="emp?.avg_rating >= 5 ? 'rated_ic':''"></ion-icon>
+          </div>
+          <ion-radio-group [value]="item.selectedEmp">
+            <ion-radio mode="ios" [value]="emp.emp_id"></ion-radio>
+          </ion-radio-group>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+  <h5 class="info-title" (click)="applyPromo()">
+    <ion-icon class="discount-icon" src="../../../assets/svg_icon/discount.svg"></ion-icon>
+    Apply Promocode
+
+
+    <div class="draw-line"></div>
+  </h5>
+
+  <h5 class="info-title">Bill Detail</h5>
+  <p class="total-text">Total Charge <span class="ion-float-right">{{currency}}{{total}}</span></p>
+  <p class="total-text discount-text">Total Discount <span class="ion-float-right">-{{currency}}{{discount}}</span></p>
+  <p class="total-text to-pay">To Pay <span class="ion-float-right">{{currency}}{{total - discount}}</span></p>
+  <p class="duration-text">Duration : {{duration}}Min</p>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" class="ion-no-margin btn-general" (click)="bookNow()">
+    Book Now
+  </ion-button>
+</ion-footer>

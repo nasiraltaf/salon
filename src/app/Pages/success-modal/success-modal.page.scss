@@ -1,0 +1,21 @@
+ion-content{
+    --background: url('../../../assets/Images/success-back.png');
+    .text-section{
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 12px;
+        h4{
+            font-family: "Fivo_sans_medium";
+            color: var(--ion-color-blue);
+            margin-bottom: 5px;
+        }
+        h2{
+            font-size: 25px;
+            font-family: "Fivo_sans_medium";
+            color: var(--ion-color-blue);
+            margin-top: 0px;
+        }
+    }
+    
+}

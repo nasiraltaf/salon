@@ -1,0 +1,31 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title header-title>SORT BY</ion-title>
+    <ion-buttons slot="end" class="ion-no-margin">
+      <ion-button (click)="filter(category)" mode="md" fill="clear" class="btn-close">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <ion-list class="ion-no-padding">
+    <ion-radio-group [value]="category">
+      <ion-item mode="md" lines="full">
+        <ion-label>Men & Women</ion-label>
+        <ion-radio (click)="filter('Men Women')" slot="start" value="Men Women" mode="md"></ion-radio>
+      </ion-item>
+
+      <ion-item mode="md" lines="full">
+        <ion-label>Women Only</ion-label>
+        <ion-radio (click)="filter('Women')" slot="start" value="Women" mode="md"></ion-radio>
+      </ion-item>
+
+      <ion-item mode="md" lines="none">
+        <ion-label>Men Only</ion-label>
+        <ion-radio (click)="filter('Men')" slot="start" value="Men" mode="md"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>

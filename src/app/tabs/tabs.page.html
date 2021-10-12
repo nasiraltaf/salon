@@ -1,0 +1,31 @@
+<ion-tabs (ionTabsWillChange)="getSelectedTab()">
+	  <ion-tab-bar slot="bottom" tab="home" (click)="viewPage('tabs/home')">
+	  
+	   
+	    <ion-img class="btn-back iconcss1"
+        src="{{activeTab == '/tabs/home' ? '../../assets/icon/home.png': '../../assets/icon/home.png'}}">
+      </ion-img>
+	   
+   <a class="ion-text-center btn-signin buttnclassothers fist" >Services <ion-back-button defaultHref="" icon="chevron-back" mode="md" class="btn-back iconcss"></ion-back-button></a>
+	</ion-tab-bar>
+	
+	
+	 <ion-tab-bar slot="bottom"  (click)="viewPage('tabs/appointment')"> 
+	  <ion-img class="btn-back iconcss1"      src="{{activeTab == '/tabs/appointment' ? '../../assets/icon/booking.png': '../../assets/icon/booking.png'}}">
+      </ion-img>
+   <a class="ion-text-center btn-signin buttnclassothers sec" >Bookings <ion-back-button defaultHref="" icon="chevron-back" mode="md" class="btn-back iconcss"></ion-back-button></a>
+	</ion-tab-bar>
+	
+	
+	
+	 <ion-tab-bar slot="bottom"  (click)="viewPage('tabs/profile')">
+	    <ion-img tab="profile" class="btn-back iconcss1"
+        src="{{activeTab == '/tabs/profile' ? '../../assets/icon/profile.png': '../../assets/icon/profile.png'}}">
+      </ion-img>
+   <a tab="profile" class="ion-text-center btn-signin buttnclassothers thjird" >Profile <ion-back-button defaultHref="" icon="chevron-back" mode="md" class="btn-back iconcss"></ion-back-button></a>
+	</ion-tab-bar>
+	
+
+	
+	
+</ion-tabs>

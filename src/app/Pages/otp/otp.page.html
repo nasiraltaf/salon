@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title header-title>Forgot Password</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal ion-text-center">
+  <ion-icon class="otp-icon" src="../../../assets/svg_icon/otp.svg"></ion-icon>
+  <h5 class="info-title">Please enter your verification code</h5>
+  <p class="info-text">We will send a verification code to your <br>
+    registered Email ID / Phone</p>
+  <form>
+    <div class="otp-input-section">
+
+      <ion-input maxlength="1" type="tel" custom-input autofocus name="a" #a [(ngModel)]="otp.a"
+        (keyup)="moveFocus($event, b, '') " [class.active]="otp.a">
+      </ion-input>
+
+      <ion-input #b name="b" custom-input [class.active]="otp.b" [(ngModel)]="otp.b" type="tel" maxlength="1"
+        (keyup)="moveFocus($event, c, a)"></ion-input>
+      <ion-input #c name="c" [class.active]="otp.c" custom-input [(ngModel)]="otp.c" type="tel" maxlength="1"
+        (keyup)="moveFocus($event, d, b)"></ion-input>
+      <ion-input #d name="d" [class.active]="otp.d" custom-input [(ngModel)]="otp.d" type="tel" maxlength="1"
+        (keyup)="moveFocus($event, '', c)"></ion-input>
+    </div>
+
+
+    <ion-button expand="block" class="ion-no-margin btn-general" (click)="doDone()">
+      Done
+    </ion-button>
+  </form>
+</ion-content>

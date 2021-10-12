@@ -1,0 +1,58 @@
+<ion-content class="ion-padding-horizontal">
+   <ion-back-button defaultHref="tabs/home" icon="chevron-back" mode="md" class="btn-back floatleft"></ion-back-button>
+	
+  <p class="padd1"></p>	
+<p input-label class="center head pad16leftright">Customer Registration</p>
+	
+	<div class="imgdivmain">
+	<img class="center colp pad16leftright imgsetting" src="https://robertjane.com/cjsgkmees/public/argon/img/brand/users.png">
+	</div>
+	
+
+  <form action="" #f="ngForm">
+  <div class="pad16leftright" >
+    <ion-input custom-input class="emailsett emailsett1 " type="text" placeholder="Name" [(ngModel)]="data.name" name="name" required></ion-input>
+    <p class="err" *ngIf="err?.name">{{err?.name}}*</p>
+  
+    <div class="custom-phone-input">
+      <!-- <ion-select appNoArrow value="+91" [interfaceOptions]="customOptions">
+        <ion-select-option value="+44" selected>+44</ion-select-option>
+        <ion-select-option value="+91">+91</ion-select-option>
+        <ion-select-option value="+92">+92</ion-select-option>
+      </ion-select> -->
+      <ion-input custom-input class="emailsett"  type="tel" placeholder="Phone" [(ngModel)]="data.phone_no" name="phone" required>
+      </ion-input>
+    </div>
+    <p class="err" *ngIf="err?.phone_no">{{err?.phone_no}}*</p>
+
+    <ion-input custom-input type="email" class="emailsett"  placeholder="Email" [(ngModel)]="data.email" name="email" required></ion-input>
+    <p class="err" *ngIf="err?.email">{{err?.email}}*</p>
+
+    <ion-input custom-input class="emailsett"  [type]="showpassword ? 'text' : 'password'" placeholder="Password" name="password"
+      [(ngModel)]="data.password" required>
+
+      <ion-button class="btn-password-toggle ion-no-margin" fill="clear" (click)="showpassword = !showpassword">
+        <ion-icon slot="icon-only" [name]="showpassword ? 'eye-off' : 'eye'"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <p class="err" *ngIf="err?.password">{{err?.password}}*</p>
+
+    <!-- <div class="styled-input-single">
+      <input type="checkbox" name="agree_terms" id="agree_terms" />
+      <label for="agree_terms">I agree to the privacy policy, website
+        terms and booking terms</label>
+    </div> -->
+</div>
+
+
+	<div class="imgdivmain1" >
+	<img class="center colp pad16leftright imgsetting ticks" src="https://robertjane.com/cjsgkmees/public/argon/img/brand/ticks.png">
+	<p input-label class="center head pad16leftright ticktext">Accept Term and Conditions</p>
+	</div>
+
+  
+	<a class="ion-text-center btn-signin buttnclass"  (click)="doSignUp()">Register   <ion-back-button defaultHref="" icon="chevron-back" mode="md" class="btn-back iconcss"></ion-back-button></a>
+	
+  </form>
+ <a class="ion-text-center btn-signin buttnclassothers"  (click)="doSignIn()">Login   <ion-back-button defaultHref="" icon="chevron-back" mode="md" class="btn-back iconcss"></ion-back-button></a>
+</ion-content>
